@@ -1,8 +1,11 @@
+<!-- сделать сессию с именем мастера  -->
+<?php session_start();
+?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
   <?php
-   $website_title = 'Личный кабинет';
+   $website_title = 'Информация о мастере и времени игры';
    require 'block/head.php'; ?>
 </head>
 <body>
@@ -23,7 +26,7 @@ ON p.id_level = l.id_level WHERE `nick` = :nick';
 <?php require 'block/leftmenu.php'; ?>
     <div class="col-md-6 mb-5">
 
-      <h4>Личная информация</h4>
+      <h4>Информация о мастере и времени игры</h4>
 <form>
 
         <label for="username"> Ваш Ник </label>
@@ -88,6 +91,7 @@ echo '<select id="masterplayer" name="masterplayer" class="form-control">
     <?php require 'block/footer.php'; ?>
 
     <script>
+
     $('#change_me').click(function () {
       var nick = $('#username').val();
       var email = $('#email').val();

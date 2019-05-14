@@ -1,4 +1,5 @@
 <?php
+ session_start();
   $username = trim(filter_var($_POST['username'], FILTER_SANITIZE_STRING));
   $email = trim(filter_var($_POST['email'], FILTER_SANITIZE_EMAIL));
   $masterplayer = trim(filter_var($_POST['masterplayer'], FILTER_SANITIZE_STRING));
@@ -31,17 +32,29 @@ require_once '../mysql_connect.php';
 $sql = 'SELECT `id_player` FROM `player` WHERE `nick` = :nick';
 $query = $pdo->prepare($sql);
 $query->execute(['nick'=> $username]);
-
 $user = $query -> fetch(PDO::FETCH_OBJ);// позволяет вытащить только одну запись из бд
+
 if ($user == NULL)
 {
      $sql = 'INSERT INTO player (nick, password, e_mail, about_yourself, contact, id_level, id_position) VALUES (?, ?, ?, ?, ?, ?, ?)';
      $query = $pdo->prepare($sql);
 
-    if ($masterplayer == "player")
+    if ($masterplayer == "player"){
     $query->execute([$username, $pass, $email, $character, $contact, '1','3']);
-    else if($masterplayer == "master")
-    $query->execute([$username, $pass, $email, $character, $contact, '5','2']);
+
+    $sql = 'SELECT `id_player` FROM `player` WHERE `nick` = :nick';
+    $query = $pdo->prepare($sql);
+    $query->execute(['nick'=> $username]);
+    $user = $query -> fetch(PDO::FETCH_OBJ);
+
+    $sql = 'INSERT INTO playing (id_position, id_player) VALUES (?, ?)';
+    $query = $pdo->prepare($sql);
+    $query->execute(['3',$user->id_player]);
+  }
+    else if($masterplayer == "master"){
+    $query->execute([$username, $pass, $email, $character, $contact, '6','5']);
+    $_SESSION['name_player_for_master'] = $username;
+  }
     else echo ('Ошибка!');
 
     echo 'готово';

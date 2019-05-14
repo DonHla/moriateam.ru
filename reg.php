@@ -67,6 +67,10 @@
         if(data == 'готово'){
           $('#reg_user').text('Всё готово');
           $('#errorBlock').hide();
+          if (masterplayer=="master")
+          location.replace("reg_master_dop.php");
+          else
+          location.replace("enter.php");
           }
         else {
             $('#errorBlock').show();

@@ -15,13 +15,22 @@
 <form>
 
 
-        <label for="timedate"> Введите время в и числа в которых вам удобно собирать игроков </label>
-        <input type="timedate" name="timedate" id="timedate" class="form-control">
+        <label for="time1"> Введите время, дату и числа в которых вам удобно собирать игроков на ближайшие игры
+        (формат время: HH:MM, день: DD.MM.YYYY). В личном кабинете Вы сможете назначить больше дат игр.
+        </label>
+        <label for="time1"> Время</label>
+        <input type="text" name="time1" id="time1" class="form-control"> <br/>
+        <label for="date1"> Дата</label>
+        <input type="text" name="date1" id="date1" class="form-control"> <br/>
+        <label for="place1"> Место встречи</label>
+        <input type="text" name="place1" id="place1" class="form-control"> <br/>
+
+
 
         <label for="freeornot"> Берёте ли вы плату? </label>
-        <select id="timedate" name="timedate" class="form-control">
-                     <option value="yes">Да</option>
-                     <option value="no">Нет</option>
+        <select id="freeornot" name="freeornot" class="form-control">
+                     <option value="Да">Да</option>
+                     <option value="Нет">Нет</option>
         </select>
 
         <?php
@@ -39,8 +48,8 @@
        echo '</select>';
         ?>
 
-        <label for="email"> Предложить свой тип игры </label>
-        <input type="email" name="email" id="email" class="form-control">
+        <label for="newTypeGame"> Предложить свой тип игры </label>
+        <input type="newTypeGame" name="newTypeGame" id="newTypeGame" class="form-control">
 
         <?php
           $sql = 'SELECT * FROM `list_universe`';
@@ -56,15 +65,15 @@
          echo '</select>';
           ?>
 
-        <label for="email"> Предложить свою вселенную </label>
-        <input type="email" name="email" id="email" class="form-control">
+        <label for="newUniverse"> Предложить свою вселенную </label>
+        <input type="newUniverse" name="newUniverse" id="newUniverse" class="form-control">
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 
-        <div class="alert alert-danger mt-2" id="errorBlock"> </div>
+        <div class="alert alert-danger mt-2" id="errorBlock5"> </div>
 
-        <button type="button" id="reg_user" class="btn btn-success mt-3">
-          Зарегестрироваться
+        <button type="button" id="reg_master" class="btn btn-success mt-3">
+          Зарегестрироваться как мастер
         </button>
 </form>
     </div>
@@ -74,28 +83,32 @@
     <?php require 'block/footer.php'; ?>
 
     <script>
-    $('#reg_user').click(function () {
-      var nick = $('#username').val();
-      var email = $('#email').val();
-      var masterplayer = $('#masterplayer').val();
-      var character = $('#character').val();
-      var contact = $('#contact').val();
-      var pass = $('#pass').val();
+    $('#reg_master').click(function () {
+
+      var time1 = $('#time1').val();
+      var date1 = $('#date1').val();
+      var place1 = $('#place1').val();
+      var freeornot = $('#freeornot').val();
+      var typeofgame = $('#typeofgame').val();
+      var newTypeGame = $('#newTypeGame').val();
+      var universe = $('#universe').val();
+      var newUniverse = $('#newUniverse').val();
 
       $.ajax({
-        url:'ajax/reg.php',
+        url:'ajax/reg_master_dop.php',
         type: 'POST',
         cache:false,
-        data:{'username' : nick, 'email' : email, 'masterplayer' : masterplayer, 'character' : character, 'contact' : contact, 'pass': pass },
+        data:{'time1' : time1, 'date1' : date1, 'place1' : place1, 'freeornot' : freeornot, 'typeofgame' : typeofgame, 'newTypeGame': newTypeGame, 'universe': universe ,'newUniverse': newUniverse },
         dataType: 'html',
         success: function(data){
         if(data == 'готово'){
-          $('#reg_user').text('Всё готово');
-          $('#errorBlock').hide();
+          $('#reg_master').text('Всё готово');
+          $('#errorBlock5').hide();
+          location.replace("enter.php");
           }
         else {
-            $('#errorBlock').show();
-            $('#errorBlock').text(data);
+            $('#errorBlock5').show();
+            $('#errorBlock5').text(data);
           }
         }
       });

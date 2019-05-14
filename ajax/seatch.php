@@ -7,16 +7,22 @@ $arrSess = array();
 
 require_once '../mysql_connect.php';
 
-$sql = 'SELECT p.nick , m.free_or_not ,
-m.date_time_master FROM `player` p INNER JOIN `master` m ON m.id_player = p.id_player
-WHERE  m.id_ltg = :tg  && m.id_universe = :un ';
+$sql = 'SELECT p.nick , m.free_or_not, dtp.time, dtp.date, dtp.place FROM `player` p
+INNER JOIN `master` m ON m.id_player = p.id_player
+INNER JOIN `data_time_place_master` dtp ON dtp.id_master = m.id_master
+WHERE m.id_ltg = :tg && m.id_universe = :un ';
 $query = $pdo->prepare($sql);
 $query->execute(['tg'=> $type_game, 'un' => $universe]);
 
 while ($row = $query -> fetch(PDO::FETCH_OBJ)) {
- $arrSess[$i] = ' Ник мастера: '. $row->nick .'
-  Бесплатно или нет: '. $row->free_or_not.'
-  Свободное время: '. $row->date_time_master ;
+ $arrSess[$i] = array('Ник мастера' =>  $row->nick,
+ 'Взимается ли плата' => $row->free_or_not,
+ 'Свободное время' => $row->time,
+ 'Дата' => $row->date,
+ 'Место' => $row->place);
+
+
+
  $i++;
 }
  $_SESSION['masterInf'] = $arrSess;

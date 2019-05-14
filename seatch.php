@@ -67,36 +67,68 @@ echo '</select>';
     Найти мастеров и комады
   </button>
 
-  <!-- <button type="button" id="btn_test" class="btn btn-success mt-4" >
-   мастера
-  </button> -->
 
 <?php
+$stringOut= '';
+$index=1;
+foreach ($_SESSION['masterInf'] as  $valueMasterInf) {
+echo '<div id="master_count_div" value="'.$valueMasterInf['Ник мастера'].'" >';
 
-foreach ($_SESSION['masterInf'] as  $value) {
-  echo   '<button type="button" id="master_cout" class="btn btn-success mt-4" >'.$value.'
-    </button> ';
+foreach ($valueMasterInf as $key => $value) {
+$stringOut= $stringOut.' '.$key.': '.$value;
 
+   }
+
+   echo   '<button type="button" id="master_cout'.$index.'" class="btn btn-success mt-4">'.$stringOut.'
+     </button> ';
+    $stringOut='';
+    $index++;
 }
+ echo '</div>';
+
+
 ?>
-
+</div>
     </form>
-    </div>
 
+<!--  Потом наведём красоту-->
+    <?php //require 'block/aside.php'; ?>
 
+    <?php //require 'block/footer.php';?>
 
-    <?php require 'block/aside.php'; ?>
-
-    <?php require 'block/footer.php';
-
-    ?>
-
-    </div>
    </main>
  </div>
 
 
  <script>
+
+ $('#master_count_div').click(function () {
+
+    var sessionValue = document.getElementById('master_count_div').getAttribute('value');
+    alert(sessionValue);
+ //
+ //    $.ajax({
+ //
+ //      url:'ajax/sessionMasterInf.php',
+ //      type: 'POST',
+ //      cache:false,
+ //      data:{'master_count_div' : sessionValue},
+ //      dataType: 'html',
+ //      success: function(data){
+ //   if(data === 'replace') {
+ //        $('#errorBlock4').hide();
+ //       location.replace("sing_up_for_game.php");
+ //   }
+ //   else {
+ //     $('#errorBlock4').show();
+ //     $('#errorBlock4').text(data);
+ //     alert("не работаю");
+ //   }
+ // }
+ //   });
+ });
+
+
  $('#btn_find_master').click(function () {
 
   var val_typeofgame = $('#typeofgame').val();

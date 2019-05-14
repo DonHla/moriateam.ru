@@ -21,9 +21,10 @@
   display: none;
 }
 
-#btn_test {
+#errorBlock5 {
   display: none;
 }
+
 /* задаем цвет фона для контейнера nav. */
 			 /* #navpersacc {
 			    margin: 100px 0;
