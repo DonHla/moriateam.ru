@@ -37,13 +37,11 @@
         require_once 'mysql_connect.php';
         $sql = 'SELECT * FROM `list_of_type_games`';
         $query = $pdo -> query($sql);
-        $val_typeofgame = 1;
        echo '<label for="typeofgame"> Какие игры хотите проводить? </label>
        <select id="typeofgame" name="typeofgame" class="form-control">';
         while ($row = $query -> fetch(PDO::FETCH_OBJ)) {
-
+       $val_typeofgame = $row->id_ltg;
        echo '<option value="'.$val_typeofgame.'">'. $row->name_of_tg .'</option>';
-         $val_typeofgame = ++$val_typeofgame;
         }
        echo '</select>';
         ?>
@@ -54,13 +52,11 @@
         <?php
           $sql = 'SELECT * FROM `list_universe`';
           $query = $pdo -> query($sql);
-          $val_universe = 11;
          echo '<label for="universe"> Какие игры хотите проводить? </label>
          <select id="universe" name="universe" class="form-control">';
           while ($row = $query -> fetch(PDO::FETCH_OBJ)) {
-
+        $val_universe = $row->id_universe;
          echo '<option value="'.$val_universe.'">'. $row->name_of_universe .'</option>';
-           $val_universe = ++$val_universe;
          }
          echo '</select>';
           ?>

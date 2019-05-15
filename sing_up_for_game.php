@@ -1,4 +1,4 @@
-<!-- сделать сессию с именем мастера  -->
+<!-- Сделать переход на других игроков. Сделать отправку комментария-->
 <?php session_start();
 ?>
 <!DOCTYPE html>
@@ -11,12 +11,27 @@
 <body>
 <?php
  require_once 'mysql_connect.php';
- $username = $_COOKIE['nickname'];
- $sql = 'SELECT p.*, l.name_of_level_player FROM `player` p  INNER JOIN `level` l
-ON p.id_level = l.id_level WHERE `nick` = :nick';
+ $username = $_SESSION['masterInfName'];
+
+ $sql = 'SELECT p.*, l.name_of_level_player FROM `player` p
+INNER JOIN `level` l ON p.id_level = l.id_level
+WHERE `nick` = :nick';
  $query = $pdo->prepare($sql);
  $query->execute(['nick'=> $username]);
  $row = $query -> fetch(PDO::FETCH_OBJ);
+
+
+$sql = 'SELECT  c.text_comment, c.id_troll FROM `player` p
+INNER JOIN `comment` c ON c.id_player = p.id_player
+WHERE `nick` = :nick';
+$query = $pdo->prepare($sql);
+$query->execute(['nick'=> $username]);
+
+$sql = 'SELECT  c.text_comment, c.id_troll FROM `player` p
+INNER JOIN `comment` c ON c.id_player = p.id_player
+WHERE `nick` = :nick';
+$query = $pdo->prepare($sql);
+$query->execute(['nick'=> $username]);
 
 ?>
 
@@ -29,74 +44,78 @@ ON p.id_level = l.id_level WHERE `nick` = :nick';
       <h4>Информация о мастере и времени игры</h4>
 <form>
 
-        <label for="username"> Ваш Ник </label>
-        <input type="text" value="<?=$row->nick?>"  name="username" id="username" class="form-control">
-
-        <label for="level"> Уровень </label>
-        <input type="text" value="<?=$row->name_of_level_player?>"  name="level" id="level" class="form-control">
-
-        <label for="email"> Почта </label>
-        <input type="email" value="<?=$row->e_mail?>" name="email" id="email" class="form-control">
-
-<label for="masterplayer"> Роль в игре </label>
+<h5> Ник мастера : <?=$row->nick?> </h5>
+<h5> Уровень : <?=$row->name_of_level_player?> </h5>
+<h5> Почта : <?=$row->e_mail?> </h5>
+<h5> Характеристика : <?=$row->about_yourself?> </h5>
+<h5> Контакты : <?=$row->contact?> </h5>
+<h5>Свободное время:</h5>
 <?php
-if ($row->id_position=="5"){
-  echo '<select id="masterplayer" name="masterplayer" class="form-control">
-               <option value="master">Мастер</option>';
-}
-elseif ($row->id_position=="3") {
-echo '<select id="masterplayer" name="masterplayer" class="form-control">
-               <option value="player">Игрок</option>';
+$sql = 'SELECT dtp.* FROM `player` p
+INNER JOIN `master` m ON  m.id_player = p.id_player
+INNER JOIN `data_time_place_master` dtp ON  m.id_master = dtp.id_master
+WHERE `nick` = :nick';
+$query2 = $pdo->prepare($sql);
+$query2->execute(['nick'=> $username]);
+while ($row2 = $query2 -> fetch(PDO::FETCH_OBJ)){
+  echo '<button type="button" value="'.$row2->time.' '.$row2->date.' '.$row2->place.'" onclick="getVal(this.value)"
+  class="btn btn-success  mt-4">'.$row2->time.' '.$row2->date.' '.$row2->place.' </button>  <br> ';
 }
 ?>
+<br>
+<h5> Отзывы:
+<?php while ($row = $query -> fetch(PDO::FETCH_OBJ) ){
 
-        </select>
+$sql = 'SELECT  p.nick, l.name_of_level_player FROM `comment` c
+INNER JOIN `player` p ON c.id_troll = p.id_player
+INNER JOIN `level` l ON l.id_level = p.id_level
+ WHERE `id_troll` = :id_troll';
+ $query1 = $pdo->prepare($sql);
+ $query1->execute(['id_troll'=> $row->id_troll]);
+ $row1 = $query1 -> fetch(PDO::FETCH_OBJ);
 
-        <label for="character"> Моя характеристика </label>
-        <input type="text" value="<?=$row->about_yourself?>"  name="character" id="character" class="form-control">
+echo '<br>'.$row->text_comment.'  <button type="button" value="'.$row1->nick.'" onclick="getVal(this.value)"
+class="btn btn-outline-success  mt-4">'.$row1->nick.'('.$row1->name_of_level_player.')'.' </button>  <br> ';
 
-        <label for="contact"> Контакты (ВК, Discord) </label>
-        <input type="text"  value="<?=$row->contact?>" name="contact" id="contact" class="form-control">
-
-       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-
-        <div class="alert alert-danger mt-2" id="errorBlock3"> </div>
-
-        <button type="button" id="change_me" class="btn btn-success mt-3 mb-3 mr-2">
-          Изменить
-        </button>
-
-        <button type="button" id="" class="btn btn-warning mt-3 mr-2 mb-3">
-          Изменить пароль
-        </button>
-
+}
+?>
+<br>
+</h5>
     <div>
-        <label for="comment" > Отзывы о вас </label>
+        <label for="comment" > Оставить отзыв о мастере </label>
         <textarea  value= "" name="comment" id="comment" class="form-control"> </textarea>
-
         <button type="button" id="" class="btn btn-success mt-3 mr-2">
-          Перейти на профиль автора
+      Отправить
         </button>
 
-        <button type="button" id="" class="btn btn-warning mt-3 mr-2">
-          Пожаловаться
-        </button>
+    </div>
 
     </div>
 </form>
+<?php require 'block/aside.php'; ?>
+
+<?php require 'block/footer.php'; ?>
     </div>
 
-    <?php require 'block/aside.php'; ?>
 
-    <?php require 'block/footer.php'; ?>
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 
     <script>
+
+    function getVal(value) {
+      alert(value);
+    }
 
     $('#change_me').click(function () {
       var nick = $('#username').val();
       var email = $('#email').val();
       var character = $('#character').val();
       var contact = $('#contact').val();
+
+
 
       $.ajax({
         url:'ajax/real_me.php',

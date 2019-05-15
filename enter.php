@@ -45,10 +45,6 @@ if($_COOKIE['nickname'] == ""):
 else:
 ?>
 
-<h2>
-  <?=$_COOKIE['nickname']?>
-</h2>
-
 <?php require 'pers_account.php';?>
 
 <?php

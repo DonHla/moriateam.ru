@@ -1,6 +1,7 @@
 <nav  class="col-md-2 mb-1" id="navpersacc" >
 <ul>
 <!-- require_once '../mysql_connect.php'; -->
+              <h2><?=$_COOKIE['nickname']?></h2>
 						  <li><a href="../real_me.php" class="btn">Моё реальное я</a></li>
 			        <li><a href="#" class="btn">Мои игры</a>
 			            <ul>

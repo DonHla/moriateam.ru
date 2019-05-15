@@ -49,7 +49,7 @@ echo '<select id="masterplayer" name="masterplayer" class="form-control">
 
         </select>
 
-        <label for="character"> Моя характеристика </label>
+        <label for="character"> Ваша характеристика </label>
         <input type="text" value="<?=$row->about_yourself?>"  name="character" id="character" class="form-control">
 
         <label for="contact"> Контакты (ВК, Discord) </label>
