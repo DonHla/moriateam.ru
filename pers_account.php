@@ -1,15 +1,41 @@
 <div>
  <main >
   <div class="row">
-<?php require 'block/leftmenu.php'; ?>
+
+<?php  require 'block/leftmenu.php'; ?>
+
   <img class="col-md-3" src="/img/madam.png" alt="" width="300" height="625">
     <div class="col-md-3 mb-1">
       <h4>Личный кабинет</h4>
+
+      <?php
+       require_once 'mysql_connect.php';
+       $username = $_COOKIE['nickname'];
+      require 'block/select_inf_player.php';
+      ?>
+
 <form>
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-    sed do eiusmod tempor incididunt ut labore et dolore magna
-    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-    ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+  <p>
+   КРАТКАЯ ИНСТРУКЦИЯ
+   <br>
+   В боковом меню вы можете найти информацию о себе, своих командах и играх и тд.
+<br>
+   *Моё реальное я - информация о вас, которую вы указывали при регистрации и коментарии других лиц, с которыми вы уже сталкивались, сталкиваетесь или столкнётесь в своих приключениях.
+<br>
+   *Мои игры - в этом отделе 3-и подраздела: грядущие, длящиеся, легенды сложены. В них вы найдёте информацию о  партиях будущих, настоящих и прошедших соответственно.
+<br>
+   *Мои party -  в этом отделе 2-и подраздела:
+   <br>
+   1-ый Составы команд - здесь распологается информация о командах в состав которых вы входите.
+   <br>
+   <?php
+   if ($_COOKIE['position'] == 3) //значит игрок
+   echo '2-ой Найти новые приключения  - здесь вы можете выбрать стиль игры и вселенную в которой вы хотели бы оказаться.';
+   else if ($_COOKIE['position'] == 5) //значит мастер
+   echo '2-ой Созвать новую программу авантюристов  - здесь вы можете открыть запись в новые командые(на новую игру), указав время, день, место сбора и название вашей команды.';
+   else echo 'Ошибка при выводе инструкции!';
+   ?>
+  </p>
 </form>
     </div>
     <?php require 'block/aside.php'; ?>

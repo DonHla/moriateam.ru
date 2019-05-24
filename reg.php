@@ -39,7 +39,7 @@
         <div class="alert alert-danger mt-2" id="errorBlock"> </div>
 
         <button type="button" id="reg_user" class="btn btn-success mt-3">
-          Зарегестрироваться
+          Зарегистрироваться
         </button>
 </form>
     </div>

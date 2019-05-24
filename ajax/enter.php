@@ -26,10 +26,17 @@ $user = $query -> fetch(PDO::FETCH_OBJ);// позволяет вытащить �
 if ($user == NULL)
 echo 'Такого пользователя не существует';
 else {
-  setcookie("nickname", $_POST['username'], time() + 3600 * 24 * 30, "/");
-  //
-//  setcookie('nickname', $username, time()-3600*24*30, "/");
-//
+  setcookie("nickname", $username, time() + 3600 * 24 * 30, "/");
+
+  $sql = 'SELECT p.id_position FROM `player` p
+  WHERE `nick` = :nick';
+  $query = $pdo->prepare($sql);
+  $query->execute(['nick'=> $username]);
+  $user = $query -> fetch(PDO::FETCH_OBJ);
+  $position = $user->id_position;
+
+  setcookie("position", $position, time() + 3600 * 24 * 30, "/");
+
   echo 'готово';
 }
 // header("Location: /test.php");

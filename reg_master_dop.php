@@ -24,7 +24,8 @@
         <input type="text" name="date1" id="date1" class="form-control"> <br/>
         <label for="place1"> Место встречи</label>
         <input type="text" name="place1" id="place1" class="form-control"> <br/>
-
+        <label for="nameOfTeam"> Название команды (соответственно название игры) </label>
+        <input type="text" name="nameOfTeam" id="nameOfTeam" class="form-control"> <br/>
 
 
         <label for="freeornot"> Берёте ли вы плату? </label>
@@ -84,6 +85,7 @@
       var time1 = $('#time1').val();
       var date1 = $('#date1').val();
       var place1 = $('#place1').val();
+      var nameOfTeam = $('#nameOfTeam').val();
       var freeornot = $('#freeornot').val();
       var typeofgame = $('#typeofgame').val();
       var newTypeGame = $('#newTypeGame').val();
@@ -94,7 +96,7 @@
         url:'ajax/reg_master_dop.php',
         type: 'POST',
         cache:false,
-        data:{'time1' : time1, 'date1' : date1, 'place1' : place1, 'freeornot' : freeornot, 'typeofgame' : typeofgame, 'newTypeGame': newTypeGame, 'universe': universe ,'newUniverse': newUniverse },
+        data:{'time1' : time1, 'date1' : date1, 'place1' : place1, 'nameOfTeam' : nameOfTeam, 'freeornot' : freeornot, 'typeofgame' : typeofgame, 'newTypeGame': newTypeGame, 'universe': universe ,'newUniverse': newUniverse },
         dataType: 'html',
         success: function(data){
         if(data == 'готово'){

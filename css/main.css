@@ -25,6 +25,11 @@
   display: none;
 }
 
+#errorBlock6 {
+  display: none;
+}
+
+
 /* задаем цвет фона для контейнера nav. */
 			 /* #navpersacc {
 			    margin: 100px 0;
@@ -54,7 +59,7 @@
 			    color:#FFF;
 			    font-size:20px;
 			    line-height: 60px;
-			    text-decoration:none;
+			    text-decoration:  none;
 			}
 
 			/* изменяем цвет фона при наведении курсора */
@@ -84,5 +89,5 @@
     			}
 
 
-li > a:after { content:  ' +'; }
+li > a:after { content:  '\2694'; }
 		li > a:only-child:after { content: ''; }

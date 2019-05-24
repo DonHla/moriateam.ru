@@ -1,6 +1,6 @@
- <!-- Можно сделать через выпадающий выбор, так будет удобней, но менее функционально -->
  <?php
  session_start();
+
  ?>
 <html lang="ru">
 <head>
@@ -95,11 +95,10 @@ $stringOut= $stringOut.' '.$key.': '.$value;
 
  <script>
 
-
    function getVal(value) {
 
      $.ajax({
-       url:'ajax/sessionMasterInf.php',
+       url:'ajax/sessionPlayerInf.php',
        type: 'POST',
        cache:false,
        data:{'value' : value},
@@ -115,10 +114,7 @@ $stringOut= $stringOut.' '.$key.': '.$value;
     }
    }
     });
-
-
    }
-
 
 
  $('#btn_find_master').click(function () {

@@ -9,31 +9,6 @@
    require 'block/head.php'; ?>
 </head>
 <body>
-<?php
- require_once 'mysql_connect.php';
- $username = $_SESSION['masterInfName'];
-
- $sql = 'SELECT p.*, l.name_of_level_player FROM `player` p
-INNER JOIN `level` l ON p.id_level = l.id_level
-WHERE `nick` = :nick';
- $query = $pdo->prepare($sql);
- $query->execute(['nick'=> $username]);
- $row = $query -> fetch(PDO::FETCH_OBJ);
-
-
-$sql = 'SELECT  c.text_comment, c.id_troll FROM `player` p
-INNER JOIN `comment` c ON c.id_player = p.id_player
-WHERE `nick` = :nick';
-$query = $pdo->prepare($sql);
-$query->execute(['nick'=> $username]);
-
-$sql = 'SELECT  c.text_comment, c.id_troll FROM `player` p
-INNER JOIN `comment` c ON c.id_player = p.id_player
-WHERE `nick` = :nick';
-$query = $pdo->prepare($sql);
-$query->execute(['nick'=> $username]);
-
-?>
 
 <?php require 'block/header.php'; ?>
 
@@ -43,12 +18,25 @@ $query->execute(['nick'=> $username]);
 
       <h4>Информация о мастере и времени игры</h4>
 <form>
+  <?php
+   require_once 'mysql_connect.php';
+   $username = $_SESSION['playerInfName'];
+  require 'block/select_inf_player.php';
+  ?>
 
-<h5> Ник мастера : <?=$row->nick?> </h5>
-<h5> Уровень : <?=$row->name_of_level_player?> </h5>
-<h5> Почта : <?=$row->e_mail?> </h5>
-<h5> Характеристика : <?=$row->about_yourself?> </h5>
-<h5> Контакты : <?=$row->contact?> </h5>
+  <?php
+  $sql = 'SELECT  tg.name_of_tg, lu.name_of_universe FROM `player` p
+  INNER JOIN `master` m ON m.id_player = p.id_player
+  INNER JOIN `list_universe` lu ON lu.id_universe = m.id_universe
+  INNER JOIN `list_of_type_games` tg ON m.id_ltg = tg.id_ltg
+  WHERE `nick` = :nick';
+  $query1 = $pdo->prepare($sql);
+  $query1->execute(['nick'=> $username]);
+  $row1 = $query1 -> fetch(PDO::FETCH_OBJ);
+
+  echo '<h5>Стиль: '.$row1->name_of_tg .' </h5> ';
+    echo '<h5>Вселенная: '.  $row1->name_of_universe .' </h5> ';
+  ?>
 <h5>Свободное время:</h5>
 <?php
 $sql = 'SELECT dtp.* FROM `player` p
@@ -58,27 +46,12 @@ WHERE `nick` = :nick';
 $query2 = $pdo->prepare($sql);
 $query2->execute(['nick'=> $username]);
 while ($row2 = $query2 -> fetch(PDO::FETCH_OBJ)){
-  echo '<button type="button" value="'.$row2->time.' '.$row2->date.' '.$row2->place.'" onclick="getVal(this.value)"
+  echo '<button type="button" value="'.$row2->time.' '.$row2->date.' '.$row2->place.'" onclick="getValTime(this.value)"
   class="btn btn-success  mt-4">'.$row2->time.' '.$row2->date.' '.$row2->place.' </button>  <br> ';
 }
 ?>
 <br>
-<h5> Отзывы:
-<?php while ($row = $query -> fetch(PDO::FETCH_OBJ) ){
-
-$sql = 'SELECT  p.nick, l.name_of_level_player FROM `comment` c
-INNER JOIN `player` p ON c.id_troll = p.id_player
-INNER JOIN `level` l ON l.id_level = p.id_level
- WHERE `id_troll` = :id_troll';
- $query1 = $pdo->prepare($sql);
- $query1->execute(['id_troll'=> $row->id_troll]);
- $row1 = $query1 -> fetch(PDO::FETCH_OBJ);
-
-echo '<br>'.$row->text_comment.'  <button type="button" value="'.$row1->nick.'" onclick="getVal(this.value)"
-class="btn btn-outline-success  mt-4">'.$row1->nick.'('.$row1->name_of_level_player.')'.' </button>  <br> ';
-
-}
-?>
+<?php   require 'block/select_comment.php'; ?>
 <br>
 </h5>
     <div>
@@ -105,36 +78,55 @@ class="btn btn-outline-success  mt-4">'.$row1->nick.'('.$row1->name_of_level_pla
 
     <script>
 
-    function getVal(value) {
-      alert(value);
+    function getValTime(valueTime) {
+      var arr = valueTime.split(' ');
+      var place = '';
+for (var i=2; i< arr.length; i++)
+{
+   place = place + arr[i] + ' ';
+}
+      var masterName = '<?php echo $username;?>';
+
+        $.ajax({
+          url:'ajax/sessionSingUp.php',
+          type: 'POST',
+          cache:false,
+          data:{'masterName' : masterName, 'time': arr[0] , 'date' : arr[1], 'place' : place },
+          dataType: 'html',
+          success: function(data){
+       if(data === 'replace') {
+           location.replace("sing_up_for_party.php");
+       }
+       else {
+        alert ('Произошла ошибка обработки')
+       }
+      }
+       });
+
+
     }
 
-    $('#change_me').click(function () {
-      var nick = $('#username').val();
-      var email = $('#email').val();
-      var character = $('#character').val();
-      var contact = $('#contact').val();
-
-
+    function getValPl(valuePl) {
 
       $.ajax({
-        url:'ajax/real_me.php',
+        url:'ajax/sessionPlayerInf.php',
         type: 'POST',
         cache:false,
-        data:{'username' : nick, 'email' : email,'character' : character, 'contact' : contact},
+        data:{'value' : valuePl},
         dataType: 'html',
         success: function(data){
-        if(data == 'готово'){
-          $('#change_me').text('Всё готово');
-          $('#errorBlock3').hide();
-          }
-        else {
-            $('#errorBlock3').show();
-            $('#errorBlock3').text(data);
-          }
-        }
-      });
-    });
+     if(data === 'replace') {
+         location.replace("player_prof_outside.php");
+     }
+     else {
+      alert ('Произошла ошибка обработки')
+     }
+    }
+     });
+    }
+
+
+
     </script>
 
 </body>
