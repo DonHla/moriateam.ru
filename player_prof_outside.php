@@ -22,21 +22,10 @@
    require_once 'mysql_connect.php';
    $username = $_SESSION['playerInfName'];
   require 'block/select_inf_player.php';
+  require 'block/select_comment.php';
   ?>
-<!-- <br>
-<input type="button" onclick="history.back();" value="Назад"/> -->
-<br>
-<?php   require 'block/select_comment.php'; ?>
-<br>
-</h5>
-    <div>
-        <label for="comment" > Оставить отзыв о игроке </label>
-        <textarea  value= "" name="comment" id="comment" class="form-control"> </textarea>
-        <button type="button" id="" class="btn btn-success mt-3 mr-2">
-      Отправить
-        </button>
-
-    </div>
+<!-- Сделать в этой кнопке ссылку на форму отправки писем -->
+          <a class="btn btn-warning mt-3 mr-2" href="/mail_for_admin.php">  Пожаловаться на игрока</a>
 
     </div>
 </form>
@@ -44,8 +33,6 @@
 
 <?php require 'block/footer.php'; ?>
     </div>
-
-
 
 </body>
 </html>

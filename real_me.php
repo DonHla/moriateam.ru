@@ -63,23 +63,8 @@ echo '<select id="masterplayer" name="masterplayer" class="form-control">
           Изменить
         </button>
 
-        <button type="button" id="" class="btn btn-warning mt-3 mr-2 mb-3">
-          Изменить пароль
-        </button>
-
-    <div>
-        <label for="comment" > Отзывы о вас </label>
-        <textarea  value= "" name="comment" id="comment" class="form-control"> </textarea>
-
-        <button type="button" id="" class="btn btn-success mt-3 mr-2">
-          Перейти на профиль автора
-        </button>
-
-        <button type="button" id="" class="btn btn-warning mt-3 mr-2">
-          Пожаловаться
-        </button>
-
-    </div>
+          <a class="btn btn-warning mt-3 mr-2 mb-3" href="/change_pass.php">  Изменить пароль</a>
+        
 </form>
     </div>
 
@@ -104,6 +89,7 @@ echo '<select id="masterplayer" name="masterplayer" class="form-control">
         if(data == 'готово'){
           $('#change_me').text('Всё готово');
           $('#errorBlock3').hide();
+          location.reload();
           }
         else {
             $('#errorBlock3').show();
@@ -112,6 +98,8 @@ echo '<select id="masterplayer" name="masterplayer" class="form-control">
         }
       });
     });
+
+
     </script>
 
 </body>

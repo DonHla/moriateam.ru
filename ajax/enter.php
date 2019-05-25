@@ -24,7 +24,7 @@ $query->execute(['nick'=> $username, 'pass' => $pass]);
 
 $user = $query -> fetch(PDO::FETCH_OBJ);// позволяет вытащить только одну запись из бд
 if ($user == NULL)
-echo 'Такого пользователя не существует';
+echo 'Такого пользователя не существует или неверный пароль';
 else {
   setcookie("nickname", $username, time() + 3600 * 24 * 30, "/");
 

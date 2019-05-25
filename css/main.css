@@ -29,6 +29,42 @@
   display: none;
 }
 
+#errorBlock7 {
+  display: none;
+}
+
+#errorBlock8 {
+  display: none;
+}
+
+#errorBlock9 {
+  display: none;
+}
+
+#errorBlock10 {
+  display: none;
+}
+
+#btnPersAcc{
+  position: absolute;
+right: 80px;
+}
+
+#exit_btn{
+  position: absolute;
+right: 0;
+}
+
+#btnEnter{
+  position: absolute;
+right: 0;
+}
+
+
+#btnReg{
+  position: absolute;
+right: 82px;
+}
 
 /* задаем цвет фона для контейнера nav. */
 			 /* #navpersacc {

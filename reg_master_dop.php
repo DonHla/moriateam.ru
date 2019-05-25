@@ -47,9 +47,6 @@
        echo '</select>';
         ?>
 
-        <label for="newTypeGame"> Предложить свой тип игры </label>
-        <input type="newTypeGame" name="newTypeGame" id="newTypeGame" class="form-control">
-
         <?php
           $sql = 'SELECT * FROM `list_universe`';
           $query = $pdo -> query($sql);
@@ -62,16 +59,16 @@
          echo '</select>';
           ?>
 
-        <label for="newUniverse"> Предложить свою вселенную </label>
-        <input type="newUniverse" name="newUniverse" id="newUniverse" class="form-control">
-
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 
         <div class="alert alert-danger mt-2" id="errorBlock5"> </div>
 
         <button type="button" id="reg_master" class="btn btn-success mt-3">
-          Зарегестрироваться как мастер
+          Зарегистрироваться как мастер
         </button>
+
+  <a class="btn btn-warning mt-3 mr-2 ml-2" href="/mail_for_admin.php"> Предложить свой стиль игры или вселенную</a>
+
 </form>
     </div>
 
@@ -88,18 +85,16 @@
       var nameOfTeam = $('#nameOfTeam').val();
       var freeornot = $('#freeornot').val();
       var typeofgame = $('#typeofgame').val();
-      var newTypeGame = $('#newTypeGame').val();
       var universe = $('#universe').val();
-      var newUniverse = $('#newUniverse').val();
 
       $.ajax({
         url:'ajax/reg_master_dop.php',
         type: 'POST',
         cache:false,
-        data:{'time1' : time1, 'date1' : date1, 'place1' : place1, 'nameOfTeam' : nameOfTeam, 'freeornot' : freeornot, 'typeofgame' : typeofgame, 'newTypeGame': newTypeGame, 'universe': universe ,'newUniverse': newUniverse },
+        data:{'time1' : time1, 'date1' : date1, 'place1' : place1, 'nameOfTeam' : nameOfTeam, 'freeornot' : freeornot, 'typeofgame' : typeofgame, 'universe': universe},
         dataType: 'html',
         success: function(data){
-        if(data == 'готово'){
+        if(data == 'готовоготово'){
           $('#reg_master').text('Всё готово');
           $('#errorBlock5').hide();
           location.replace("enter.php");

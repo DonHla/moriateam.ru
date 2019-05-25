@@ -6,6 +6,8 @@
   $character = trim(filter_var($_POST['character'], FILTER_SANITIZE_STRING));
   $contact = trim(filter_var($_POST['contact'], FILTER_SANITIZE_STRING));
   $pass = trim(filter_var($_POST['pass'], FILTER_SANITIZE_STRING));
+  $passrepeat = trim(filter_var($_POST['passrepeat'], FILTER_SANITIZE_STRING));
+
 
   $error='';
   if(strlen($username) <= 3)
@@ -16,8 +18,23 @@
  $error = 'ну хотябы пару слов о себе';
   else if(strlen($contact) <= 3)
   $error = 'Введите контакты';
-  else if(strlen($pass) <= 3)
-  $error = 'Придумайте пароль';
+  else if(strlen($pass) <= 7)
+  $error = 'Пароль должен быть минимум из 8 символов';
+  else if(!preg_match("/([0-9]+)/", $pass))
+     $error = 'Не хватает цифр';
+     else if(!preg_match("/([a-z]+)/", $pass))
+         $error = 'Не хватает маленьких букв';
+   else  if(!preg_match("/([A-Z]+)/", $pass))
+         $error = 'Не хватает больших букв';
+   else if(strlen($passrepeat)==0)
+         $error = 'Введите повтор пароля';
+  else if($passrepeat != $pass)
+  $error = 'Неверный повтор пароля';
+
+
+
+
+
 
 if($error != ''){
 echo $error;

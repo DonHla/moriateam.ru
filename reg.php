@@ -34,6 +34,9 @@
         <label for="pass"> Пароль </label>
         <input type="password" name="pass" id="pass" class="form-control">
 
+        <label for="passrepeat"> Повторите пароль </label>
+        <input type="password" name="passrepeat" id="passrepeat" class="form-control">
+
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 
         <div class="alert alert-danger mt-2" id="errorBlock"> </div>
@@ -56,12 +59,13 @@
       var character = $('#character').val();
       var contact = $('#contact').val();
       var pass = $('#pass').val();
+  var passrepeat = $('#passrepeat').val();
 
       $.ajax({
         url:'ajax/reg.php',
         type: 'POST',
         cache:false,
-        data:{'username' : nick, 'email' : email, 'masterplayer' : masterplayer, 'character' : character, 'contact' : contact, 'pass': pass },
+        data:{'username' : nick, 'email' : email, 'masterplayer' : masterplayer, 'character' : character, 'contact' : contact, 'pass': pass,  'passrepeat': passrepeat },
         dataType: 'html',
         success: function(data){
         if(data == 'готово'){
