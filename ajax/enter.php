@@ -39,6 +39,6 @@ else {
 
   echo 'готово';
 }
-// header("Location: /test.php");
+// header("Location: /index.php");
 //Потогм вставим сюда личный кабинет
 ?>

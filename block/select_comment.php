@@ -54,7 +54,7 @@ echo '<br>
   });
 
   function getValPl(valuePl) {
-
+var myName = '<?php echo $_COOKIE['nickname']?>';
     $.ajax({
       url:'ajax/sessionPlayerInf.php',
       type: 'POST',
@@ -63,6 +63,9 @@ echo '<br>
       dataType: 'html',
       success: function(data){
    if(data === 'replace') {
+     if (valuePl == myName)
+     location.replace("enter.php");
+     else
        location.replace("player_prof_outside.php");
    }
    else {

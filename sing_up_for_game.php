@@ -30,9 +30,9 @@
 $sql = 'SELECT dtp.* FROM `player` p
 INNER JOIN `master` m ON  m.id_player = p.id_player
 INNER JOIN `data_time_place_master` dtp ON  m.id_master = dtp.id_master
-WHERE `nick` = :nick AND  dtp.date >= :today AND  dtp.time >= :time1';
+WHERE `nick` = :nick';
 $query2 = $pdo->prepare($sql);
-$query2->execute(['nick'=> $username, 'today'=> date("d.m.Y"), 'time1'=> date("H:m")]);
+$query2->execute(['nick'=> $username]);
 while ($row2 = $query2 -> fetch(PDO::FETCH_OBJ)){
   echo '<button type="button" value="'.$row2->time.' '.$row2->date.' '.$row2->place.'" onclick="getValTime(this.value)"
   class="btn btn-success  mt-4">'.$row2->time.' '.$row2->date.' '.$row2->place.' </button>  <br> ';
