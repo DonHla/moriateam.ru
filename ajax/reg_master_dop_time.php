@@ -23,12 +23,15 @@ else if($date1{2}!="." || $date1{5}!=".")
 $error = 'Пожалуйста, соблюдайте формат ввода даты "."';
 else if(!is_numeric($date1{0}.$date1{1}.$date1{3}.$date1{4}.$date1{6}.$date1{7}.$date1{8}.$date1{9}))
 $error = 'Пожалуйста, соблюдайте формат ввода даты (цифры)';
-else if($date1{0}.$date1{1} > 31 || $date1{0}.$date1{1} <= 0 || $date1{3}.$date1{4} > 12  || $date1{3}.$date1{4} <=0
-|| $date1 < date("d.m.Y") )
-$error = 'Всего 31 день, 12 месяцев и назначать встречу в прошлом не стоит, Доктор Кто';
+else if($date1{0}.$date1{1} > 31 || $date1{0}.$date1{1} <= 0 || $date1{3}.$date1{4} > 12  || $date1{3}.$date1{4} <=0)
+$error = 'Всего 31 день, 12 месяцев';
+else if($date1{0}.$date1{1} < date("d") && $date1{3}.$date1{4} < date("m") && $date1{6}.$date1{7}.$date1{8}.$date1{9} < date("Y")
+&& $time1{0}.$time1{1} <= date("H") && $time1{3}.$time1{4} <= date("i") )
+$error = 'В прошлом не стоит, Доктор Кто (сегодня '.date("d.m.Y").')' ;
 else if ($date1{6}.$date1{7}.$date1{8}.$date1{9} > 2100)
 $error='Предчувствуем появление высшего эльфа';
 
+date_default_timezone_set("Europe/Moscow");
 
  if(strlen($time1) < 5)
  $error = 'Введите время';
@@ -40,8 +43,8 @@ $error='Предчувствуем появление высшего эльфа'
  $error = 'Пожалуйста, соблюдайте формат ввода времени (цифры)';
  else if ($time1{0}.$time1{1} > 24 || $time1{3}.$time1{4} > 60)
  $error = 'Всего 24 часа и 60 минут';
- else if($time1 < date("H:m"))
-  $error = 'Назначать встречу в прошлом не стоит, Доктор Кто';
+ // else if($time1{0}.$time1{1} <= date("H") && $time1{3}.$time1{4} <= date("i"))
+ //  $error = 'Назначать встречу в прошлом не стоит, Доктор Кто (сейчас '.date("H:i").')';
 
 
 if($error != ''){

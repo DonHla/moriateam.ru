@@ -35,7 +35,7 @@ echo '<br>';
  <br>
 <h5><strong>Назначить ещё</strong></h5>
         <label for="time1"> Введите время, дату и числа в которых вам удобно собирать игроков на ближайшие игры
-        (формат время: HH:MM, день: DD.MM.YYYY). В личном кабинете Вы сможете назначить больше дат игр.
+        (формат время: HH:MM, день: DD.MM.YYYY).
         </label>
         <label for="time1"> Время</label>
         <input type="text" name="time1" id="time1" class="form-control"> <br/>

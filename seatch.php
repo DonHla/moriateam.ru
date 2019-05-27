@@ -22,6 +22,11 @@
 
  <?php
  require_once 'mysql_connect.php';
+ $sql = 'DELETE FROM `data_time_place_master`
+ WHERE  (`date`< ? AND `time`< ? )';
+ $query2 = $pdo->prepare($sql);
+ $query2->execute([date("d.m.Y"), date("H:i")]);
+
  $sql = 'SELECT * FROM `list_of_type_games`';
  $query = $pdo -> query($sql);
 

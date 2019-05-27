@@ -30,9 +30,9 @@
 $sql = 'SELECT dtp.* FROM `player` p
 INNER JOIN `master` m ON  m.id_player = p.id_player
 INNER JOIN `data_time_place_master` dtp ON  m.id_master = dtp.id_master
-WHERE `nick` = :nick';
+WHERE `nick` = :nick AND  dtp.date >= :today AND  dtp.time >= :time1 ';
 $query2 = $pdo->prepare($sql);
-$query2->execute(['nick'=> $username]);
+$query2->execute(['nick'=> $username, 'today'=> date("d.m.Y"), 'time1'=> date("H:i")]);
 while ($row2 = $query2 -> fetch(PDO::FETCH_OBJ)){
   echo '<button type="button" value="'.$row2->time.' '.$row2->date.' '.$row2->place.'" onclick="getValTime(this.value)"
   class="btn btn-success  mt-4">'.$row2->time.' '.$row2->date.' '.$row2->place.' </button>  <br> ';
@@ -85,26 +85,6 @@ for (var i=2; i< arr.length; i++)
 
 
     }
-
-    // function getValPl(valuePl) {
-    //
-    //   $.ajax({
-    //     url:'ajax/sessionPlayerInf.php',
-    //     type: 'POST',
-    //     cache:false,
-    //     data:{'value' : valuePl},
-    //     dataType: 'html',
-    //     success: function(data){
-    //  if(data === 'replace') {
-    //      location.replace("player_prof_outside.php");
-    //  }
-    //  else {
-    //   alert ('Произошла ошибка обработки')
-    //  }
-    // }
-    //  });
-    // }
-
 
 
     </script>
