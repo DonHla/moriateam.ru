@@ -32,10 +32,6 @@
   $error = 'Неверный повтор пароля';
 
 
-
-
-
-
 if($error != ''){
 echo $error;
 exit();
@@ -51,8 +47,15 @@ $query = $pdo->prepare($sql);
 $query->execute(['nick'=> $username]);
 $user = $query -> fetch(PDO::FETCH_OBJ);// позволяет вытащить только одну запись из бд
 
+$sql = 'SELECT `id_player` FROM `player` WHERE `e_mail` = :email';
+$query = $pdo->prepare($sql);
+$query->execute(['email' => $email]);
+$emailcheсk = $query -> fetch(PDO::FETCH_OBJ);
+
 if ($user == NULL)
 {
+  if($emailcheсk == NULL)
+  {
      $sql = 'INSERT INTO player (nick, password, e_mail, about_yourself, contact, id_level, id_position) VALUES (?, ?, ?, ?, ?, ?, ?)';
      $query = $pdo->prepare($sql);
 
@@ -77,7 +80,12 @@ if ($user == NULL)
     echo 'готово';
 }
 else {
- echo 'Игрок с таким ником уже существует';
+ echo 'Игрок с токой почтой уже существует ';
+  exit();
+}
+}
+else {
+ echo 'Игрок с таким ником уже существует ';
   exit();
 }
 

@@ -31,13 +31,27 @@
         <label for="contact"> Контакты (ВК, Discord) </label>
         <input type="text" name="contact" id="contact" class="form-control">
 
-        <label for="pass"> Пароль </label>
-        <input type="password" name="pass" id="pass" class="form-control">
+<br>
+        <form class="my-form">
+            <div class="form-group">
+                <label for="pass"> Пароль </label>
+                <input type="password" name="pass" id="password" class="form-control">
+            </div>
+            <div class="form-group">
+                <a href="#" onclick="return false" id="s-h-pass">Показать пароль</a>
+            </div>
+        </form>
 
-        <label for="passrepeat"> Повторите пароль </label>
-        <input type="password" name="passrepeat" id="passrepeat" class="form-control">
+        <form class="my-form">
+            <div class="form-group">
+              <label for="passrepeat"> Повторите пароль </label>
+              <input type="password" name="passrepeat" id="passrepeat" class="form-control">
+            </div>
+            <div class="form-group">
+                <a href="#" onclick="return false" id="s-h-pass-repeat">Показать повтор пароля</a>
+            </div>
+        </form>
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 
         <div class="alert alert-danger mt-2" id="errorBlock"> </div>
 
@@ -51,7 +65,33 @@
 
     <?php require 'block/footer.php'; ?>
 
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+
     <script>
+        $( document ).ready(function() {
+            $('#s-h-pass').click(function(){
+                var type = $('#password').attr('type') == "text" ? "password" : 'text',
+                 c = $(this).text() == "Скрыть пароль" ? "Показать пароль" : "Скрыть пароль";
+                $(this).text(c);
+                $('#password').prop('type', type);
+            });
+
+            $('#s-h-pass-repeat').click(function(){
+                var type = $('#passrepeat').attr('type') == "text" ? "password" : 'text',
+                 c = $(this).text() == "Скрыть повтор пароля" ? "Показать повтор пароля" : "Скрыть повтор пароля";
+                $(this).text(c);
+                $('#passrepeat').prop('type', type);
+            });
+        });
+
+
+    </script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+    <script>
+
+
     $('#reg_user').click(function () {
       var nick = $('#username').val();
       var email = $('#email').val();

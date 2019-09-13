@@ -66,64 +66,99 @@ right: 0;
 right: 82px;
 }
 
-/* задаем цвет фона для контейнера nav. */
-			 /* #navpersacc {
-			    margin: 100px 0;
-			    background-color: #BF7F11;
-			} */
+#btnQuestion{
+  position: absolute;
+right: 285px;
+top: 10px;
+}
 
-			/* убираем отступы и поля, а также list-style для "ul",
-			 * и добавляем "position:relative" */
-		 #navpersacc ul {
-			    padding:0;
-			    margin:0;
-			    list-style: none;
-			    position: relative;
-			    }
+    .drop_vert_menu {
+        list-style-type: none;
+        width: 198px;
+        margin: 0;
+        padding: 0;
+        background: #CD853D;
+     }
 
-			/* применяем inline-block позиционирование к элементам навигации */
-			 #navpersacc ul li {
-          display:list-item;
-          width: 200px;
-			    background-color: #BF7F11;
-			    }
+    .drop_vert_menu  ul {
+        list-style-type: none;
+        width: 180px;
+        margin: 0;
+        padding: 0;
+    }
+    .drop_vert_menu > li {
+      position: relative;
+      background: #CD853F
+      padding:10px 0px 10px 16px;;
+    }
 
-			/* стилизуем ссылки */
-		 #navpersacc a {
-			    display:block;
-			    padding:0 10px;
-			    color:#FFF;
-			    font-size:20px;
-			    line-height: 60px;
-			    text-decoration:  none;
-			}
-
-			/* изменяем цвет фона при наведении курсора */
-		 #navpersacc a:hover {
-			    background-color: #80550B;
-		}
-
-    /* скрываем выпадающие списки по умолчанию
-    			 * и задаем абсолютное позиционирование */
-    			#navpersacc ul ul {
-    			    display: none;
-    			    top: 100%;
-    			}
-
-    			/* отображаем выпадающий список при наведении */
-    			#navpersacc ul li:hover > ul {
-    			    display:inherit;
-    			}
-
-    			/* первый уровень выпадающего списка */
-    			#navpersacc ul ul li {
-    			    min-width:200px;
-    			    float:none;
-    			    display:list-item;
-    			    position: relative;
-              background-color: #3333;
-    			}
+    .drop_vert_menu > li:hover {
+    background: #8B4513
+    }
+    .drop_vert_menu > li > a{
+      font-size:18px;
+      color: White;
+      text-decoration:none;
+    }
 
 
-li > a:after { content:  '\2694'; }
-		li > a:only-child:after { content: ''; }
+      .drop_vert_menu li ul {
+        position: absolute;
+        display: none;
+        top: 2px;
+        left: 195px;
+       }
+
+     .drop_vert_menu li:hover ul {
+       display: block;
+       }
+
+    .drop_vert_menu li ul li{
+      text-align:left;
+      background: #CD8530;
+      padding: 8px 0px 8px 10px;
+    }
+
+    .drop_vert_menu li ul li:hover {
+      background: #8B4510;
+
+    }
+
+    .drop_vert_menu li ul li a{
+      font-size:14px;
+      color:White;
+      text-decoration:none;
+    }
+
+    .drop_vert_menu li ul li a:hover{
+      font-size: 14px;
+      color: black;
+      text-decoration:none;
+    }
+
+
+
+/*  Кнопка внутри поля */
+
+    /* input[type="submit"] {
+    width: 20px; /* Ширина кнопки */
+    /* height: 20px; /* Высота кнопки */
+    /* border: none; /* Убираем рамку */
+    /* background: url(images/video.png) no-repeat 50% 50%; /* Параметры фона */
+   /* } */
+
+   html {
+   	overflow-y: scroll;
+   }
+
+   .btn-circle {
+    background: url(../img/for_circle_button.png) no-repeat top right;
+    width: 38px;
+    height: 38px;
+    border-radius: 19px;
+    text-align: center;
+    padding-left: 0;
+    padding-right: 0;
+    font-size: 16px;
+    /* white-space: normal; /* восстанавливаем свойству значение по умолчанию */ */
+}

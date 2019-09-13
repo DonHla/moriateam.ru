@@ -14,13 +14,25 @@
       <h4>Смена пароля</h4>
 <form>
 
-        <label for="pass"> Пароль</label>
-        <input type="password" name="pass" id="pass" class="form-control">
+        <form class="my-form">
+            <div class="form-group">
+                <label for="password"> Пароль </label>
+                <input type="password" name="password" id="password" class="form-control">
+            </div>
+            <div class="form-group">
+                <a href="#" onclick="return false" id="s-h-pass">Показать пароль</a>
+            </div>
+        </form>
 
-        <label for="passrepeat"> Повторите пароль </label>
-        <input type="password" name="passrepeat" id="passrepeat" class="form-control">
-
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+        <form class="my-form">
+            <div class="form-group">
+              <label for="passrepeat"> Повторите пароль </label>
+              <input type="password" name="passrepeat" id="passrepeat" class="form-control">
+            </div>
+            <div class="form-group">
+                <a href="#" onclick="return false" id="s-h-pass-repeat">Показать повтор пароля</a>
+            </div>
+        </form>
 
         <div class="alert alert-danger mt-2" id="errorBlock10"> </div>
 
@@ -34,10 +46,32 @@
 
     <?php require 'block/footer.php'; ?>
 
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+
+    <script>
+        $( document ).ready(function() {
+            $('#s-h-pass').click(function(){
+                var type = $('#password').attr('type') == "text" ? "password" : 'text',
+                 c = $(this).text() == "Скрыть пароль" ? "Показать пароль" : "Скрыть пароль";
+                $(this).text(c);
+                $('#password').prop('type', type);
+            });
+
+            $('#s-h-pass-repeat').click(function(){
+                var type = $('#passrepeat').attr('type') == "text" ? "password" : 'text',
+                 c = $(this).text() == "Скрыть повтор пароля" ? "Показать повтор пароля" : "Скрыть повтор пароля";
+                $(this).text(c);
+                $('#passrepeat').prop('type', type);
+            });
+        });
+    </script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
     <script>
     $('#change_pass').click(function () {
 
-      var pass = $('#pass').val();
+      var pass = $('#password').val();
       var passrepeat = $('#passrepeat').val();
 
       $.ajax({

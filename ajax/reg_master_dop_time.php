@@ -1,6 +1,7 @@
 <?php
 session_start();
-
+//можно использовать для нормального мравнения времени time()
+// и в бд поле date сделать int и через php записывать туда time
 $error='';
 
 $time1 =trim(filter_var( $_POST['time1'], FILTER_SANITIZE_STRING));
@@ -69,7 +70,7 @@ $query5 = $pdo->prepare($sql);
 $query5->execute(['time_game'=> $time1, 'data_game'=> $date1, 'place_game'=> $place1 ]);
 $rowСheck = $query5->fetch(PDO::FETCH_OBJ);
 
-if($rowСheck==NULL)
+if($rowСheck == NULL)
 {
 $sql = 'SELECT m.id_master  FROM `player` p
 INNER JOIN `master` m ON m.id_player = p.id_player

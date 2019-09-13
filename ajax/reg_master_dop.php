@@ -10,9 +10,13 @@ $universe = $_POST['universe'];
 
 require_once '../mysql_connect.php';
 
+// исправить при регистрации нового, выдаёт ошибку
+
 $sql = 'SELECT `id_player`, `id_position` FROM `player` WHERE `nick` = :nick';
 $query = $pdo->prepare($sql);
-if($_COOKIE['nickname'] == '')
+//вот здесь ещё не решённая проблема 
+if(!isset($_COOKIE['nickname']))
+//if($_COOKIE['nickname'] == '') Если в header, то можно применить такую конструкцию
 $query->execute(['nick'=> $_SESSION['name_player_for_master']]);
 else
 $query->execute(['nick'=>$_COOKIE['nickname']]);

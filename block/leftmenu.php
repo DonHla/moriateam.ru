@@ -1,5 +1,7 @@
- <nav  class="col-md-2 mb-1" id="navpersacc" >
-   <ul>
+ <!-- <nav  class="col-md-2 mb-1" id="navpersacc" > -->
+ <div class="col-md-4">
+
+   <ul class="drop_vert_menu" id="navpersacc">
 
 
                  <li><a href="../enter.php" class="btn"> <h2><?=$_COOKIE['nickname']?>
@@ -35,4 +37,5 @@
                  </li>
                   <li><a href="../mail_for_admin.php" class="btn"> Внести свои предложения &#10001;</h2> </a></li>
    			    </ul>
-   			</nav>
+             </div>
+   			<!-- </nav> -->

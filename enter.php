@@ -9,7 +9,7 @@
 <?php require 'block/header.php'; ?>
 
 <?php
-ini_set('display_errors','Off');
+ini_set('display_errors','Off');// не показывать ошибку на этой странице
 if($_COOKIE['nickname'] == ""):
 ?>
 
@@ -24,8 +24,15 @@ if($_COOKIE['nickname'] == ""):
   <label for="username"> Введите ваш Ник </label>
   <input type="text" name="username" id="username" class="form-control">
 
-  <label for="pass"> Пароль </label>
-  <input type="password" name="pass" id="pass" class="form-control">
+  <form class="my-form">
+      <div class="form-group">
+          <label for="password"> Пароль </label>
+          <input type="password" name="password" id="password" class="form-control">
+      </div>
+      <div class="form-group">
+          <a href="#" onclick="return false" id="s-h-pass">Показать пароль</a>
+      </div>
+  </form>
 
   <div class="alert alert-danger mt-2" id="errorBlock2"> </div>
 
@@ -53,13 +60,27 @@ endif;
 
 </div>
 
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+
+  <script>
+      $( document ).ready(function() {
+          $('#s-h-pass').click(function(){
+              var type = $('#password').attr('type') == "text" ? "password" : 'text',
+               c = $(this).text() == "Скрыть пароль" ? "Показать пароль" : "Скрыть пароль";
+              $(this).text(c);
+              $('#password').prop('type', type);
+          });
+      });
+  </script>
+
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 
 <script>
 
 $('#enter_user').click(function () {
   var nick = $('#username').val();
-  var pass = $('#pass').val();
+  var pass = $('#password').val();
 
   $.ajax({
     url:'ajax/enter.php',

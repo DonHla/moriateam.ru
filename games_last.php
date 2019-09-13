@@ -25,9 +25,9 @@ pl.id_playing = lop.id_playing3 OR pl.id_playing = lop.id_playing4)
 INNER JOIN `team` t ON lop.id_list_of_playing = t.id_list_of_playing
 INNER JOIN `game` g ON g.id_team = t.id_team
 RIGHT JOIN `master` m ON t.id_master = m.id_master
- WHERE `nick` = :nick AND   g.data_game <= :today  AND  g.time_game < :time1 ';
+ WHERE `nick` = :nick AND   g.data_game <:today';
  $query = $pdo->prepare($sql);
- $query->execute(['nick'=> $_COOKIE['nickname'], 'today'=> date("d.m.Y"), 'time1'=> date("H:m")  ]);
+ $query->execute(['nick'=> $_COOKIE['nickname'], 'today'=> date("d.m.Y") ]);
 
 }
 else if ($_COOKIE['position'] == 5) //значит мастер
