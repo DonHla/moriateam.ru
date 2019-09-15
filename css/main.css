@@ -67,7 +67,7 @@ right: 0;
 box-shadow: 0 0 10px rgba(0,0,0,0.5);
     }
 
-    .drop_vert_menu  a:hover{
+    .drop_vert_menu  button:hover{
       color: red;
       text-decoration:none;
     }

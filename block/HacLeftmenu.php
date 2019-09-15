@@ -1,15 +1,17 @@
- <!-- <nav  class="col-md-2 mb-1" id="navpersacc" > -->
+
+
  <div id="leftmenu_div" class="col-md-4">
 
    <ul class="drop_vert_menu" id="navpersacc">
 
               </li>
-                 <li><a href="#" class="btn">Создать</a></li>
-   			        <li><a href="#" class="btn">Активные</a> </li>
+
+                 <li><a class="btn" href="#top">Создать</a></li>
+   			        <li><a class="btn" href="#activ" >Активные</a> </li>
 
                <!-- Переделать запрос под вывод активных вопросов -->
                          <?php
-                        //   $sql = 'SELECT * FROM `list_universe`';
+                        //   $sql = 'SELECT * FROM `list_questions`';
                         //   $query = $pdo -> query($sql);
                         //  echo '<label for="universe"> Какие игры хотите проводить? </label>
                         //  <select id="universe" name="universe" class="form-control">';
@@ -19,7 +21,7 @@
                         //  }
                         //  echo '</select>';   ?>
 
-   			        <li><a href="#" class="btn">Завершённые</a></li>
+   			        <li><a  href="#finished" class="btn">Завершённые</a></li>
              <!-- Переделать запрос под вывод закрытых вопросов вопросов -->
                        <?php
                       //   $sql = 'SELECT * FROM `list_universe`';
@@ -34,4 +36,3 @@
 
    			    </ul>
              </div>
-   			<!-- </nav> -->
