@@ -4,7 +4,7 @@
 
 <?php
 ini_set('display_errors','Off');
-if($_COOKIE['nickname'] == "1"):
+if($_COOKIE['nickname'] == ""):
 ?>
 
 <?php
@@ -23,13 +23,13 @@ if($_COOKIE['nickname'] == "1"):
 // действия кнопки выхода
 $('#exit_btn').click(function () {
   $.ajax({
-    url:'ajax/exit.php',
+    url:'ajax/HacExit.php',
     type:'POST',
     cache:false,
     data:{},
     dataType: 'html',
     success: function(data){
-        location.replace("../enter.php");
+        location.replace("../HacEnterPHP.php");
     }
   });
 });

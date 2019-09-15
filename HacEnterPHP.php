@@ -10,17 +10,15 @@
 
 <?php
 ini_set('display_errors','Off');// не показывать ошибку на этой странице
-if($_COOKIE['nickname'] == "1"):
+if($_COOKIE['nickname'] == ""):
 ?>
 
   <div  id="form_enter" class="col-md-3">
-
   <h4 align="center">Вход</h4>
 <form >
 <p>
   <label for="username"> Логин </label>
   <input type="text" name="username" id="username" class="form-control">
-
   <form class="my-form">
       <div class="form-group">
           <label for="password"> Пароль </label>
@@ -36,13 +34,11 @@ if($_COOKIE['nickname'] == "1"):
   <center><button type="button" id="enter_user"  class="btn btn-danger mt-3">
     Войти
   </button></center>
-</p>
 </form>
 
 </div>
-
 <img  src="/img/vtb-log.png"  width="115" height="45"  align="right" hspace="10" vspace="10">
-
+</p>
 <?php require 'block/HacFooter.php'; ?>
 
 <?php
@@ -80,7 +76,7 @@ $('#enter_user').click(function () {
   var pass = $('#password').val();
 
   $.ajax({
-    url:'ajax/enter.php',
+    url:'ajax/HacEnter.php',
     type:'POST',
     cache:false,
     data:{'username' : nick, 'pass': pass },
