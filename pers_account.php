@@ -3,12 +3,11 @@
   <div class="row">
 
 <?php  require 'block/leftmenu.php'; ?>
-<!-- <div class="col-md-3 mb-1">
-</div> -->
-  <!-- <img class="col-md-3" src="/img/madam.png" alt="" width="300" height="625"> -->
+<!-- <div class="col-md-8 mb-1"> -->
+<!-- <img class="col-md-3" src="/img/madam.png" alt="" width="300" height="625"> -->
     <div class="col-md-3 mb-1">
-      <h4>Личный кабинет</h4>
 
+      <h4>Личный кабинет</h4>
       <?php
        require_once 'mysql_connect.php';
        $username = $_COOKIE['nickname'];
@@ -22,5 +21,6 @@
 
     <?php require 'block/footer.php'; ?>
     </div>
+    <!-- </div> -->
    </main>
  </div>
